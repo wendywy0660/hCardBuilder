@@ -1,0 +1,91 @@
+/* variables */
+@heading-color: #2c3e50;
+@subheading-color : #b0b8bc;
+@hcheading-color: #95a5a6;
+@text-color: #000000;
+@text-color-light: #ffffff;
+@label-color: #2c3e50;
+@title-color: #34495e;
+@hcbutton-color : #3498db;
+@hcpreview-bg-color: #e1e4e7;
+@hcpreview-border-color: #dbe0e2;
+
+/* mixins */
+.font-size(@sizeValue) {
+  @remValue: @sizeValue;
+  @pxValue: (@sizeValue * 10);
+  font-size: ~"@{pxValue}px"; 
+  font-size: ~"@{remValue}rem";
+}
+
+/* styles for hCard */
+html { font-size: 62.5%; }
+body { font-family: 'Merriweather Sans', sans-serif; .font-size(1.6); font-weight: 400;  color: @text-color; background-color: @heading-color; }
+
+input[type=text]::-ms-clear {
+	display: none;
+}
+.hcardBlock{
+	background-color: #fff;
+    /*position: relative;*/
+}
+
+.hcardBuilder {
+	padding: 15px 30px 25px;
+	h1 { .font-size(2.8); font-weight: 800; color: @heading-color; white-space: nowrap; }
+	h2 { border-bottom: 1px solid #ccc; .font-size(1); font-weight: 700; line-height: 2; text-transform: uppercase; color: @subheading-color; margin-bottom: 18px;}
+
+	form {
+		label { .font-size(1.2); font-weight: 400; line-height: 1.6; color: @label-color; text-transform: uppercase; }
+		input { .font-size(1.6); }
+		.btn { background-color: @hcbutton-color; box-shadow: 0 3px 0 darken(@hcbutton-color, 10%); color: #fff; .font-size(2); padding: 6px 35px; margin: 20px auto; }
+	}
+
+}
+.hcardBlockR { background-color: @hcpreview-bg-color; }
+.hcardPreview {
+	padding: 45px; 
+	h2 { .font-size(1.6); color: @heading-color; text-transform: uppercase; margin-bottom: 18px; }
+	.panel-heading { 
+		padding: 20px; height: 70px; background-color: @heading-color; color: @text-color-light; 
+		.panel-title {
+			.font-size(2.4); font-weight: 700; line-height: 1.4; text-transform: capitalize;
+		}
+	}
+	.panel-body { padding: 24px 24px 14px; }
+	.dl-horizontal {
+		border-bottom: 1px solid @hcpreview-border-color; margin-bottom: 10px;
+		dt {
+			text-align: left; color: @title-color; .font-size(1); font-weight: 400; line-height: 2.2; text-transform: uppercase; width: 60px;
+		}
+		dd { margin-left: 70px;  line-height: 1.3;}
+	}
+	.email { color: @text-color; text-decoration: none; }
+}
+
+/* Equal height for two columns in paralell */ 
+@media (min-width: 768px) {
+	.hcardContainer {
+	    display: table; padding: 50px 0; position: relative; 
+	} 
+ 	.hcardBlock{
+	    float: none;
+	    display: table-cell;
+	    vertical-align: top;
+	}
+ 	.hcardBlockR{
+		vertical-align: middle; 
+	}
+	.hcardPreview {}
+	#hccontainer {
+		width: 100%;
+		/*position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; */ 
+	}
+}
+@media (max-width: 991px) and (min-width: 768px) {
+	.hcardBuilder {
+	  padding: 15px 5px 25px;
+	}
+	.hcardBuilder form { max-height: 700px; overflow-y: auto; overflow-x: hidden; } /* add a scrollbar if the form is higher than 700px */
+
+}

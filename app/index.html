@@ -1,0 +1,210 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>hCard Builder</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/hcard.css">
+    <!-- endbuild -->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container hcardContainer">
+      
+      <div class="row">
+        <div class="col-md-6 col-sm-4 col-xs-12 hcardBlock">
+          <div class="hcardBuilder">
+            <h1>hCard Builder</h1>
+
+            <form>
+
+              <h2>Personal Details</h2>
+              <div class="row">
+                <div class="col-md-6 col-xs-12">
+                  <div class="form-group">
+                    <label for="hcGivenName">Given Name</label>
+                    <input type="text" class="form-control hcField" id="hcGivenName" data-field="givenName" autocomplete="off">
+                  </div>
+                </div>
+
+                <div class="col-md-6 col-xs-12">
+                  <div class="form-group">
+                    <label for="hcSurname">SurName</label>
+                    <input type="text" class="form-control hcField" id="hcSurname" data-field="surname" autocomplete="off">
+                  </div>
+                </div>
+
+
+                <div class="col-md-6 col-xs-12">
+                  <div class="form-group">
+                    <label for="hcEmail">Email</label>
+                    <input type="email" class="form-control hcField" id="hcEmail" data-field="email" autocomplete="off">
+                  </div>
+                </div>
+
+                <div class="col-md-6 col-xs-12">
+                  <div class="form-group">
+                    <label for="hcPhone">Phone</label>
+                    <input type="tel" class="form-control hcField" id="hcPhone" data-field="phone" autocomplete="off">
+                  </div>
+                </div>
+              </div><!-- End of .row -->
+
+             <h2>Address</h2>
+              <div class="row">
+                <div class="col-md-6 col-xs-12">
+                  <div class="form-group">
+                    <label for="hcHouseNumber">House Name Or #</label>
+                    <input type="text" class="form-control hcField" id="hcHouseNumber" data-field="houseNumber" autocomplete="off">
+                  </div>
+                </div>
+
+                <div class="col-md-6 col-xs-12">
+                  <div class="form-group">
+                    <label for="hcStreet">Street</label>
+                    <input type="text" class="form-control hcField" id="hcStreet" data-field="street" autocomplete="off">
+                  </div>
+                </div>
+
+
+                <div class="col-md-6 col-xs-12">
+                  <div class="form-group">
+                    <label for="hcSurburb">Suburb</label>
+                    <input type="text" class="form-control hcField" id="hcSurburb" data-field="suburb" autocomplete="off">
+                  </div>
+                </div>
+
+                <div class="col-md-6 col-xs-12">
+                  <div class="form-group">
+                    <label for="hcState">State</label>
+                    <input type="text" class="form-control hcField" id="hcState" data-field="state" autocomplete="off">
+                  </div>
+                </div>
+
+                <div class="col-md-6 col-xs-12">
+                  <div class="form-group">
+                    <label for="hcPostcode">Postcode</label>
+                    <input type="text" class="form-control hcField" id="hcPostcode" data-field="postcode" autocomplete="off">
+                  </div>
+                </div>
+
+                <div class="col-md-6 col-xs-12">
+                  <div class="form-group">
+                    <label for="hcCountry">Country</label>
+                    <input type="text" class="form-control hcField" id="hcCountry" data-field="country" autocomplete="off">
+                  </div>
+                </div>
+              </div><!-- End of .row -->
+
+
+               <button type="submit" class="btn center-block">Create hCard</button>
+
+            </form>
+
+          </div> <!-- End of .hcardBuilder -->
+          
+        </div>
+        
+        <div class="col-md-6 col-sm-8 col-xs-12 hcardBlock hcardBlockR">
+          <div class="hcardPreview">
+            <h2 class="text-right">hCard Preview</h2>
+            <div id="hccontainer"></div>
+
+          </div><!-- End of .hcardPreview -->
+        </div>
+      </div>
+
+
+    </div>
+
+    
+    <script type="text/ractive" id="tplHcard">
+      <div class="vcard">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><span class="fn">{{givenName}} {{surname}}</span></h3>
+          </div>
+          <div class="panel-body">
+
+            <dl class="dl-horizontal">
+              <dt>Email</dt>
+              <dd><a class="email" href="mailto:{{email}}">{{email}}</a></dd>
+            </dl>
+            <dl class="dl-horizontal">
+              <dt>Phone</dt>
+              <dd><div class="tel">{{phone}}</div></dd>
+            </dl>
+            <div class="adr">
+              <dl class="dl-horizontal">
+                <dt>Address</dt>
+                <dd>
+                    <div class="street-address">{{houseNumber}} {{street}}</div></dd>
+              </dl>
+              <dl class="dl-horizontal">
+                <dt>&nbsp;</dt>
+                <dd>
+                    <span class="locality">{{suburb}}</span>
+                   {{ state ? "," : "" }}
+                    <span class="region">{{state}}</span>
+                  
+                </dd>
+              </dl>
+
+              <dl class="dl-horizontal">
+              <div class="row">
+                <div class="col-xs-6">
+                  <dt>Postcode</dt>
+                  <dd><span class="postal-code">{{postcode}}</span></dd>
+                </div>
+                <div class="col-xs-6">
+                  <dt>Country</dt>
+                  <dd><span class="country-name">{{country}}</span></dd>
+                </div>
+              </div>
+            </dl>
+
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!-- build:js(.) scripts/vendor.js -->
+    <script src="bower_components/ractive/ractive-legacy.js"></script>
+    
+    <!-- endbuild -->
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='//www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-XXXXX-X');ga('send','pageview');
+    </script>
+
+        <!-- build:js(.) scripts/plugins.js -->
+        <!-- endbuild -->
+
+        <!-- build:js({app,.tmp}) scripts/main.js -->
+        <script src="scripts/main.js"></script>
+        <!-- endbuild -->
+</body>
+</html>
